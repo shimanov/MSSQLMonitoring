@@ -9,26 +9,84 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         Title="Соединение с сервером" 
-        Height="219" Width="405" 
+        Height="262" Width="455" 
         WindowStyle="ToolWindow" 
-        WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Label Content="Имя сервера" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Height="25"/>
-        <TextBox x:Name="ServerNameTxb" HorizontalAlignment="Left" Height="25" Margin="163,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Text="10.0.75.1"/>
-        <Label Content="Имя пользователя" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Height="25"/>
-        <TextBox x:Name="UserTxb" HorizontalAlignment="Left" Height="25" Margin="163,44,0,0" Text="sa" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-        <Label Content="Пароль" HorizontalAlignment="Left" Margin="10,77,0,0" VerticalAlignment="Top" Height="25"/>
-        <PasswordBox x:Name="PasswordTxb" HorizontalAlignment="Left" Margin="163,76,0,0" VerticalAlignment="Top" Width="200" Height="25" Password="qwep[]ghjB1"/>
-        <Button x:Name="ConnectionBtn" Content="Соединить"
-                HorizontalAlignment="Left" Margin="105,127,0,0" 
-                VerticalAlignment="Top" Width="110" Height="25" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Content="Имя сервера" 
+               Height="25"
+               Margin="20,-10,10,0"/>
+        <TextBox Grid.Row="0"
+                 Grid.Column="1"
+                 x:Name="ServerNameTxb" 
+                 Height="25" 
+                 Text="10.0.75.1"
+                 Margin="0,-10,10,0"/>
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Height="25"
+               Content="Проверка подлинности"
+               Margin="20,5,0,10"/>
+        <ComboBox x:Name="selectCmb"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  Height="25"
+                  Margin="0,-4,10,0"
+                  Style="{StaticResource MaterialDesignComboBox}">
+            <TextBlock>Проверка подлинности SQL Server</TextBlock>
+            <TextBlock>Проверка подлинности Windows</TextBlock>
+        </ComboBox>
+        <Label Grid.Row="2"
+               Grid.Column="0"
+               Content="Имя пользователя" 
+               Height="25"
+               Margin="20,-10,0,10"/>
+        <TextBox Grid.Row="2"
+                 Grid.Column="1"
+                 x:Name="UserTxb" 
+                 Height="25" 
+                 Text="sa" 
+                 Margin="0,-10,10,0"/>
+        <Label Grid.Row="3"
+               Grid.Column="0"
+               Content="Пароль" 
+               Height="25"
+               Margin="20,-10,10,0"/>
+        <PasswordBox Grid.Row="3"
+                     Grid.Column="1"
+                     x:Name="PasswordTxb"
+                     Height="25"
+                     Margin="0,-10,10,0"
+                     Password="qwep[]ghjB1"/>
+        <Button x:Name="ConnectionBtn" 
+                Content="Соединить"
+                Grid.Row="4"
+                Grid.Column="0"
+                Height="25" Width="125"
+                Margin="0,-15,10,0"
                 Click="ConnectionBtn_Click"
-                materialDesign:ShadowAssist.ShadowDepth="Depth3"/>
+                materialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalAlignment="Right"/>
         <Button x:Name="CancelBtn" Content="Отмена" 
-                HorizontalAlignment="Left" Margin="235,127,0,0" 
-                VerticalAlignment="Top" Width="110" Height="25" 
+                Grid.Row="4"
+                Grid.Column="1"
+                Width="110" Height="25" 
+                Margin="0,-15,0,0"
                 Click="CancelBtn_Click"
                 materialDesign:ShadowAssist.ShadowDepth="Depth3"/>
+
 
     </Grid>
 </Window>
