@@ -1,0 +1,56 @@
+﻿<Window x:Class="DatabaseMaintenance.CheckWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:DatabaseMaintenance"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        Title="CheckWindow" Height="450" Width="800">
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button
+            x:Name="StartBtn"
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="20,15,0,0"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="False"
+            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+            Content="Начать проверку БД"
+            Height="30" Width="200" HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="StartBtn_Click"/>
+        <Button
+            x:Name="StopBtn"
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="20,15,0,0"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            Content="Остановить проверку"
+            Height="30" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock
+            x:Name="resultTb"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Grid.RowSpan="6"/>
+    </Grid>
+</Window>
