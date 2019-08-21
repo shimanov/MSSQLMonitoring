@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}" Loaded="Window_Loaded">
-    <Grid>
+    <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -39,6 +39,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        
         <Button
             x:Name="EditConnBtn"
             Grid.Column="0"
@@ -55,6 +56,7 @@
                 Height="24"
                 Width="24" />
         </Button>
+        
         <Button
             x:Name="CheckBtn"
             Grid.Column="1"
@@ -69,6 +71,7 @@
                 Height="24"
                 Width="24" />
         </Button>
+        
         <Button
             x:Name="RepairBtn"
             Grid.Column="2"
@@ -83,25 +86,29 @@
                 Height="24"
                 Width="24" />
         </Button>
+        
         <materialDesign:Card 
             x:Name="memoryCard"
-            Grid.Column="3"
+            Grid.Column="5"
             Grid.Row="0"
-            Grid.ColumnSpan="3" 
-            Margin="20,15,0,0"
+            Grid.ColumnSpan="3"
             Height="40"
+            Margin="0,15,0,0"
             Padding="35,10,0,0"
             materialDesign:ShadowAssist.ShadowDepth="Depth3"/>
 
-        <materialDesign:Card
-            x:Name="versionCard"
-            Grid.Column="6"
-            Grid.Row="0"
+        <DataGrid
+            x:Name="versionGrid"
+            Grid.Column="5"
+            Grid.Row="1"
+            Grid.RowSpan="2"
             Grid.ColumnSpan="4"
-            Margin="20,15,0,0"
-            Height="40"
-            Padding="35,10,0,0"
-            materialDesign:ShadowAssist.ShadowDepth="Depth3"/>
+            HorizontalScrollBarVisibility="Disabled"
+            CanUserSortColumns="False"
+            CanUserAddRows="False"
+            AutoGenerateColumns="True">
+            <DataGrid.Columns/>
+        </DataGrid>
 
         <DataGrid
             Padding="10,0,0,0"

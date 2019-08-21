@@ -64,17 +64,16 @@ namespace DatabaseMaintenance
 
         private void versionServer(string conn)
         {
-            string query = "use master SELECT SERVERPROPERTY('ProductVersion'), SERVERPROPERTY('InstanceName'), SERVERPROPERTY('Edition');";
+            string query = "use master SELECT SERVERPROPERTY('ServerName') AS [Сервер], SERVERPROPERTY('ProductVersion') AS [Версия продукта], SERVERPROPERTY('Edition') AS [Редакция], SERVERPROPERTY('ProductLevel') AS [SP]; ";
             using (SqlConnection connection = new SqlConnection(conn))
             {
                 SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                 {
-                    while (reader.Read())
-                    {
-                        versionCard.Content = "Версия MS SQL Server: " + reader[0] + '\n' + reader[1] + '\n' + reader[2];
-                    }
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    versionGrid.ItemsSource = dataTable.DefaultView;
                 }
                 connection.Close();
             }
