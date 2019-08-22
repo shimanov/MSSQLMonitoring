@@ -99,5 +99,11 @@ namespace DatabaseMaintenance
             CheckWindow checkWindow = new CheckWindow();
             checkWindow.Show();
         }
+
+        private void AboutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow about = new AboutWindow();
+            about.Show();
+        }
     }
 }

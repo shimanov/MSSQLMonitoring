@@ -10,7 +10,8 @@
         Height="800" Width="1400"
         WindowStartupLocation="CenterScreen"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignPaper}" Loaded="Window_Loaded">
+        Background="{DynamicResource MaterialDesignPaper}" 
+        Loaded="Window_Loaded">
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -86,7 +87,22 @@
                 Height="24"
                 Width="24" />
         </Button>
-        
+
+        <Button
+            x:Name="AboutBtn"
+            Grid.Column="3"
+            Grid.Row="0"
+            HorizontalAlignment="Left"
+            Margin="20,10,0,0"
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+            materialDesign:ShadowAssist.ShadowDepth="Depth4"
+            ToolTip="Info" Height="40" VerticalAlignment="Top" Click="AboutBtn_Click">
+            <materialDesign:PackIcon
+                Kind="AboutOutline"
+                Height="24"
+                Width="24" />
+        </Button>
+
         <materialDesign:Card 
             x:Name="memoryCard"
             Grid.Column="5"
