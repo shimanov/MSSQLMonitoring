@@ -23,25 +23,33 @@ namespace DatabaseMaintenance
 
         private void ConnectionBtn_Click(object sender, RoutedEventArgs e)
         {
-            string serverName = ServerNameTxb.Text;
-            string user = UserTxb.Text;
-            string password = PasswordTxb.Password;
-
-            string connectionString = "Data Source=" + serverName + ";Initial Catalog=master;User Id=" + user + ";Password =" + password;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (selectCmb.SelectedIndex == 0)
             {
-                try
-                {
-                    connection.Open();
-                    new MainWindow(serverName, user, password).Show();
+                string serverName = ServerNameTxb.Text;
+                string user = UserTxb.Text;
+                string password = PasswordTxb.Password;
 
-                    Close();
-                }
-                catch (Exception exp)
+                string connectionString = "Data Source=" + serverName + ";Initial Catalog=master;User Id=" + user + ";Password =" + password;
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    MessageBox.Show(exp.Message);
+                    try
+                    {
+                        connection.Open();
+                        new MainWindow(serverName, user, password).Show();
+
+                        Close();
+                    }
+                    catch (Exception exp)
+                    {
+                        MessageBox.Show(exp.Message);
+                    }
                 }
+            }
+            else
+            {
+                string serverName = ServerNameTxb.Text;
+                string connectionStringWin = "Data Source=" + serverName + ";Initial Catalog=master; Integrated security = SSPI;";
             }
         }
     }
