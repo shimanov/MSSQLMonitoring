@@ -10,8 +10,8 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}" 
         Title="About" Height="250" Width="460"
-        WindowStyle="ToolWindow" 
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStyle="SingleBorderWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
