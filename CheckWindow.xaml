@@ -26,31 +26,40 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
         <Button
-            x:Name="StartBtn"
+            x:Name="ProgressBtn"
             Grid.Row="0"
             Grid.Column="0"
             Margin="20,15,0,0"
             Style="{StaticResource MaterialDesignRaisedButton}"
             materialDesign:ButtonProgressAssist.Value="-1"
-            materialDesign:ButtonProgressAssist.IsIndicatorVisible="False"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
             materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-            Content="Начать проверку БД"
+            Content="Проверяем БД..."
             Height="30" Width="200" HorizontalAlignment="Left" 
-            VerticalAlignment="Top" Click="StartBtn_Click"/>
+            VerticalAlignment="Top"
+            Visibility="Hidden" IsEnabled="False"/>
         <Button
-            x:Name="StopBtn"
+            x:Name="StartBtn"
             Grid.Row="0"
-            Grid.Column="1"
+            Grid.Column="0"
             Margin="20,15,0,0"
+            Height="30" Width="200" HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
             Style="{StaticResource MaterialDesignRaisedButton}"
-            Content="Остановить проверку"
-            Height="30" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            ToolTip="Resource name: MaterialDesignRaisedLightButton"
+            Click="StartBtn_Click"
+            Content="Старт">
+        </Button>
+
         <TextBlock
             x:Name="resultTb"
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            Grid.RowSpan="6"/>
+            Grid.RowSpan="6"
+            Margin="10,10,10,0"
+            />
     </Grid>
 </Window>

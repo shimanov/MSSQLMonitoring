@@ -22,6 +22,9 @@ namespace DatabaseMaintenance
         string connectionString = "Data Source= R54-630099-S;Initial Catalog=DB630099;Integrated Security= SSPI;";
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
+            StartBtn.Visibility = Visibility.Collapsed;
+            StartBtn.Visibility = Visibility.Visible;
+
             string query = "DBCC CHECKDB ();";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -32,7 +35,7 @@ namespace DatabaseMaintenance
                 int count = command.ExecuteNonQuery();
                 Console.WriteLine("{0}", count);
                 connection.Close();
-                Console.ReadLine();
+
             }
         }
     }
