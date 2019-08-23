@@ -47,7 +47,7 @@
         <Label Grid.Row="1"
                Grid.Column="2"
                Grid.ColumnSpan="3"
-               Grid.RowSpan="2"
+               Grid.RowSpan="1"
                Margin="0,25,0,0" 
                ScrollViewer.VerticalScrollBarVisibility="Disabled">
             <Label.Content>
@@ -56,6 +56,15 @@
                 </TextBlock>
             </Label.Content>
         </Label>
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="2"
+            Grid.ColumnSpan="3"
+            Margin="0,10,0,0">
+            <Hyperlink NavigateUri="https://github.com/shimanov/DatabaseMaintenance" RequestNavigate="Hyperlink_RequestNavigate">
+                Исходный код и описание на GitHub
+            </Hyperlink>
+        </TextBlock>
         
     </Grid>
 </Window>
