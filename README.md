@@ -25,3 +25,26 @@
 - [ ] Освобождение не используемой памяти MS SQL
 - [x] Окно About
 - [ ] Window в цвет приложения
+
+### Используемые скрипты 
+
+Использованная память сервером
+```sql
+select (physical_memory_in_use_kb/1024)Phy_Memory_usedby_Sqlserver_MB 
+from sys. dm_os_process_memory
+```
+
+Общий объем памяти сервера
+```sql
+select (total_physical_memory_kb/1024) 
+from sys.dm_os_sys_memory
+```
+
+Получение сведений о выпуске MS SQL Server
+```sql
+SELECT 
+	SERVERPROPERTY('ServerName') AS [Сервер]
+	,SERVERPROPERTY('ProductVersion') AS [Версия продукта]
+	,SERVERPROPERTY('Edition') AS [Редакция]
+	,SERVERPROPERTY('ProductLevel') AS [SP];
+```
