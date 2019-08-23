@@ -112,7 +112,8 @@
             Margin="0,15,0,0"
             Padding="35,10,0,0"
             materialDesign:ShadowAssist.ShadowDepth="Depth3"/>
-        
+
+
         <materialDesign:Card 
             x:Name="memoryCard"
             Grid.Column="5"
