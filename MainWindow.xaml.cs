@@ -26,9 +26,18 @@ namespace DatabaseMaintenance
         {
             InitializeComponent();
 
-            string queryString = "use master select (physical_memory_in_use_kb/1024)Phy_Memory_usedby_Sqlserver_MB from sys. dm_os_process_memory";
             string connectionString = "Data Source=" + server + ";Initial Catalog=master;User Id=" + user + ";Password =" + password;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            
+            databaseData(connectionString);
+            versionServer(connectionString);
+            memoryServer(connectionString);
+            sqlMemory(connectionString);
+        }
+
+        private void memoryServer(string conn)
+        {
+            string queryString = "use master select (physical_memory_in_use_kb/1024)Phy_Memory_usedby_Sqlserver_MB from sys. dm_os_process_memory";
+            using (SqlConnection connection = new SqlConnection(conn))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -41,9 +50,24 @@ namespace DatabaseMaintenance
                 }
                 connection.Close();
             }
+        }
 
-            databaseData(connectionString);
-            versionServer(connectionString);
+        private void sqlMemory(string conn)
+        {
+            string queryString = "use master select (total_physical_memory_kb/1024) from sys.dm_os_sys_memory";
+            using (SqlConnection connection = new SqlConnection(conn))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        physMemoryCard.Content = "Память: " + reader[0] + " MB";
+                    }
+                }
+                connection.Close();
+            }
         }
 
         private void databaseData(string conn)
@@ -59,6 +83,7 @@ namespace DatabaseMaintenance
                     adapter.Fill(dataTable);
                     dataGrid.ItemsSource = dataTable.DefaultView;
                 }
+                sqlConnection.Close();
             }
         }
 
