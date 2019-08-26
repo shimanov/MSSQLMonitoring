@@ -48,3 +48,14 @@ SELECT
 	,SERVERPROPERTY('Edition') AS [Редакция]
 	,SERVERPROPERTY('ProductLevel') AS [SP];
 ```
+
+Данные о выполнении команды DBCC
+```sql
+SELECT
+    [command]
+    ,[start_time]
+    ,[percent_complete]
+    ,[estimated_completion_time] / 60000. AS [estimated_completion_time_min]
+FROM sys.dm_exec_requests
+WHERE [command] LIKE '%DBCC%'
+```
