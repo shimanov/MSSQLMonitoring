@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.IO;
 using System.Windows;
 
 namespace DatabaseMaintenance
@@ -14,19 +15,13 @@ namespace DatabaseMaintenance
             InitializeComponent();
         }
 
-        //static void SqlInfoMessageEventHandler(object sender, SqlInfoMessageEventArgs e)
-        //{
-        //    //Console.WriteLine(e.Message);
-        //    //resultTb.Text = 
-        //}
-
-        string connectionString = "Data Source= 10.0.75.1;Initial Catalog=DB633541;User id=sa;Password=qwep[]ghjB1";
+        readonly string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
             StartBtn.Visibility = Visibility.Collapsed;
             StartBtn.Visibility = Visibility.Visible;
 
-            string query = "DBCC CHECKDB ();";
+            string query = "DBCC CHECKDB();";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
