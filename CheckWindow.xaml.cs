@@ -16,6 +16,7 @@ namespace DatabaseMaintenance
         }
 
         readonly string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
+
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
             StartBtn.Visibility = Visibility.Collapsed;
