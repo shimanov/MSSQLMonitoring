@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.IO;
 using System.Windows;
 
 namespace DatabaseMaintenance
@@ -12,8 +13,6 @@ namespace DatabaseMaintenance
         public LoginWindow()
         {
             InitializeComponent();
-            //MainWindow mainWindow = new MainWindow();
-            //mainWindow.Show();
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
@@ -36,8 +35,11 @@ namespace DatabaseMaintenance
                     try
                     {
                         connection.Open();
-                        new MainWindow(serverName, user, password).Show();
-
+                        using (StreamWriter stream = new StreamWriter(Directory.GetCurrentDirectory() + "/DatabaseMaintenance"))
+                        {
+                            stream.Write(connectionString);
+                        }
+                        new MainWindow().Show();
                         Close();
                     }
                     catch (Exception exp)
@@ -46,10 +48,28 @@ namespace DatabaseMaintenance
                     }
                 }
             }
-            else
+            if(selectCmb.SelectedIndex == 1)
             {
                 string serverName = ServerNameTxb.Text;
+
                 string connectionStringWin = "Data Source=" + serverName + ";Initial Catalog=master; Integrated security = SSPI;";
+                using (SqlConnection connection = new SqlConnection(connectionStringWin))
+                {
+                    try
+                    {
+                        connection.Open();
+                        using (StreamWriter stream = new StreamWriter(Directory.GetCurrentDirectory() + "/DatabaseMaintenance"))
+                        {
+                            stream.Write(connectionStringWin);
+                        }
+                        new MainWindow().Show();
+                        Close();                        
+                    }
+                    catch (Exception exp)
+                    {
+                        MessageBox.Show(exp.Message);
+                    }
+                }
             }
         }
     }

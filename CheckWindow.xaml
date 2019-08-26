@@ -48,10 +48,12 @@
             Height="30" Width="200" HorizontalAlignment="Left" 
             VerticalAlignment="Top"
             Style="{StaticResource MaterialDesignRaisedButton}"
-            ToolTip="Resource name: MaterialDesignRaisedLightButton"
+            ToolTip="Начать проверку БД на наличие ошибок"
             Click="StartBtn_Click"
             Content="Старт">
         </Button>
+        
+        
 
         <Label
             x:Name="resultTxb"

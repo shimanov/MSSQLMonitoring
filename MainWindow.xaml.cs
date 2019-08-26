@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DatabaseMaintenance
 {
@@ -22,12 +10,13 @@ namespace DatabaseMaintenance
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(string server, string user, string password)
+        public MainWindow()
         {
             InitializeComponent();
 
-            string connectionString = "Data Source=" + server + ";Initial Catalog=master;User Id=" + user + ";Password =" + password;
-            
+            string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
+            //string connectionString = "Data Source=" + server + ";Initial Catalog=master;User Id=" + user + ";Password =" + password;
+
             databaseData(connectionString);
             versionServer(connectionString);
             memoryServer(connectionString);
@@ -104,11 +93,6 @@ namespace DatabaseMaintenance
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void EditConnBtn_Click(object sender, RoutedEventArgs e)
         {
             LoginWindow loginWindow = new LoginWindow();
@@ -119,16 +103,12 @@ namespace DatabaseMaintenance
 
         private void CheckBtn_Click(object sender, RoutedEventArgs e)
         {
-            //new CheckWindow(string server, string user, string password).Show();
-
-            CheckWindow checkWindow = new CheckWindow();
-            checkWindow.Show();
+            new CheckWindow().Show();
         }
 
         private void AboutBtn_Click(object sender, RoutedEventArgs e)
         {
-            AboutWindow about = new AboutWindow();
-            about.Show();
+            new AboutWindow().Show();
         }
     }
 }
