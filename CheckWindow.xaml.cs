@@ -12,19 +12,19 @@ namespace DatabaseMaintenance
     /// </summary>
     public partial class CheckWindow : Window
     {
+        readonly string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
+        //readonly string connectionString = "Data Source=R54-630099-S;Initial Catalog =DB630099; Integrated Security = SSPI;";
+
         public CheckWindow()
         {
             InitializeComponent();
-        }
 
-        //readonly string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
-        readonly string connectionString = "Data Source=R54-630099-S;Initial Catalog =DB630099; Integrated Security = SSPI;";
+            StartBtn.IsEnabled = false;
+            ProgressBtn.Visibility = Visibility.Collapsed;
+        }
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
-            StartBtn.Visibility = Visibility.Collapsed;
-            StartBtn.Visibility = Visibility.Visible;
-
             string query = "DBCC CHECKDB();";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -42,6 +42,8 @@ namespace DatabaseMaintenance
                 connection.Close();
             }
         }
+
+        
 
         //private async Task CheckDb()
         //{

@@ -10,8 +10,9 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         Title="CheckWindow" Height="450" Width="800">
-    <Grid ShowGridLines="False">
+    <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -27,10 +28,18 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <ComboBox
+            Name="dbCmb"
+            Grid.Row="0"
+            Grid.Column="0"
+            Height="25"
+            Margin="10,0,10,0">
+        </ComboBox>
+        
         <Button
             x:Name="ProgressBtn"
             Grid.Row="0"
-            Grid.Column="0"
+            Grid.Column="1"
             Margin="20,15,0,0"
             Style="{StaticResource MaterialDesignRaisedButton}"
             materialDesign:ButtonProgressAssist.Value="-1"
@@ -43,7 +52,7 @@
         <Button
             x:Name="StartBtn"
             Grid.Row="0"
-            Grid.Column="0"
+            Grid.Column="1"
             Margin="20,15,0,0"
             Height="30" Width="200" HorizontalAlignment="Left" 
             VerticalAlignment="Top"
@@ -52,8 +61,13 @@
             Click="StartBtn_Click"
             Content="Старт">
         </Button>
-        
-        
+
+        <ProgressBar
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Height="15"
+            Margin="100,-5,100,0"/>
 
         <Label
             x:Name="resultTxb"
