@@ -14,26 +14,32 @@ namespace DatabaseMaintenance
             InitializeComponent();
         }
 
-        static void SqlInfoMessageEventHandler(object sender, SqlInfoMessageEventArgs e)
-        {
-            Console.WriteLine(e.Message);
-        }
+        //static void SqlInfoMessageEventHandler(object sender, SqlInfoMessageEventArgs e)
+        //{
+        //    //Console.WriteLine(e.Message);
+        //    //resultTb.Text = 
+        //}
 
-        string connectionString = "Data Source= R54-630099-S;Initial Catalog=DB630099;Integrated Security= SSPI;";
+        string connectionString = "Data Source= 10.0.75.1;Initial Catalog=DB633541;User id=sa;Password=qwep[]ghjB1";
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
             StartBtn.Visibility = Visibility.Collapsed;
             StartBtn.Visibility = Visibility.Visible;
 
             string query = "DBCC CHECKDB ();";
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.InfoMessage += SqlInfoMessageEventHandler;
                 connection.Open();
+
+                connection.InfoMessage += delegate (object sender, SqlInfoMessageEventArgs e)
+                {
+                    resultTxb.Content += "\n" + e.Message;
+                };
+                connection.FireInfoMessageEventOnUserErrors = true;
                 SqlCommand command = new SqlCommand(query, connection);
                 command.CommandTimeout = 2147483647;
                 int count = command.ExecuteNonQuery();
-                Console.WriteLine("{0}", count);
                 connection.Close();
 
             }

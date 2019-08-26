@@ -10,7 +10,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         Title="CheckWindow" Height="450" Width="800">
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -53,13 +53,15 @@
             Content="Старт">
         </Button>
 
-        <TextBlock
-            x:Name="resultTb"
+        <Label
+            x:Name="resultTxb"
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Grid.RowSpan="6"
             Margin="10,10,10,0"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             />
     </Grid>
 </Window>
