@@ -15,7 +15,6 @@ namespace DatabaseMaintenance
             InitializeComponent();
 
             string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
-            //string connectionString = "Data Source=" + server + ";Initial Catalog=master;User Id=" + user + ";Password =" + password;
 
             databaseData(connectionString);
             versionServer(connectionString);
