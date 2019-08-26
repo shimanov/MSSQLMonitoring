@@ -10,8 +10,7 @@
         Height="800" Width="1400"
         WindowStartupLocation="CenterScreen"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignPaper}" 
-        Loaded="Window_Loaded">
+        Background="{DynamicResource MaterialDesignPaper}" >
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -148,7 +147,7 @@
             CanUserAddRows="False"
             AutoGenerateColumns="True">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn
+                <!--<DataGridCheckBoxColumn
                     ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
                     <DataGridCheckBoxColumn.Header>
@@ -162,7 +161,7 @@
                             IsChecked="{Binding IsAllItems3Selected}" />
                         </Border>
                     </DataGridCheckBoxColumn.Header>
-                </DataGridCheckBoxColumn>
+                </DataGridCheckBoxColumn>-->
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
