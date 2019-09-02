@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.ComponentModel;
 using System.Data.SqlClient;
 using System.IO;
 using System.Threading;
@@ -12,57 +14,75 @@ namespace DatabaseMaintenance
     /// </summary>
     public partial class CheckWindow : Window
     {
-        readonly string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
-        //readonly string connectionString = "Data Source=R54-630099-S;Initial Catalog =DB630099; Integrated Security = SSPI;";
+        //readonly string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
+        readonly string connectionString = "Data Source=10.0.75.1;Initial Catalog =DB633541; User id=sa; password=qwep[]ghjB1";
+
+        private BackgroundWorker backgroundWorker;
 
         public CheckWindow()
         {
             InitializeComponent();
-
-            StartBtn.IsEnabled = false;
-            ProgressBtn.Visibility = Visibility.Collapsed;
+            backgroundWorker = (BackgroundWorker)FindResource("backgroundWorker");
         }
 
-        private void StartBtn_Click(object sender, RoutedEventArgs e)
+        private async void StartBtn_Click(object sender, RoutedEventArgs e)
         {
-            string query = "DBCC CHECKDB();";
+            StartBtn.Visibility = Visibility.Hidden;
+            ProgressBtn.Visibility = Visibility.Visible;
+
+
+            Task task = Task.Run(() => CheckDb());
+            await task;
+
+        }
+
+
+        private async Task CheckDb()
+        {
+            string query = "DBCC CHECKDB() WITH NO_INFOMSGS, ALL_ERRORMSGS, DATA_PURITY;";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-
                 connection.InfoMessage += delegate (object sender, SqlInfoMessageEventArgs e)
                 {
                     resultTxb.Content += "\n" + e.Message;
                 };
+
+                await connection.OpenAsync();
+
                 connection.FireInfoMessageEventOnUserErrors = true;
                 SqlCommand command = new SqlCommand(query, connection);
                 command.CommandTimeout = 2147483647;
                 int count = command.ExecuteNonQuery();
-                connection.Close();
+                await connection.CloseAsync();
+
+                ProgressBtn.Visibility = Visibility.Hidden;
+                SaveBtn.Visibility = Visibility.Visible;
             }
         }
 
-        
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFileDialog.FileName, resultTxb.Content.ToString());
+            }
+        }
 
-        //private async Task CheckDb()
-        //{
-        //    string query = "DBCC CHECKDB();";
+        private void BackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
 
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        await connection.OpenAsync();
+        }
 
-        //        connection.InfoMessage += delegate (object sender, SqlInfoMessageEventArgs e)
-        //        {
-        //            resultTxb.Content += "\n" + e.Message;
-        //        };
-        //        connection.FireInfoMessageEventOnUserErrors = true;
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //        command.CommandTimeout = 2147483647;
-        //        int count = command.ExecuteNonQuery();
-        //        connection.Close();
-        //    }
-        //}
+        private void BackgroundWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+
+        }
     }
 }

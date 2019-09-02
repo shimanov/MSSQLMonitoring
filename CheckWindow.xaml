@@ -5,11 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:DatabaseMaintenance"
+        xmlns:my="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.EventBasedAsync"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         Title="CheckWindow" Height="450" Width="800">
+    <Window.Resources>
+        <my:BackgroundWorker
+            x:Key="backgroundWorker"
+            WorkerReportsProgress="True"
+            WorkerSupportsCancellation="True"
+            DoWork="BackgroundWorker_DoWork"
+            ProgressChanged="BackgroundWorker_ProgressChanged"
+            RunWorkerCompleted="BackgroundWorker_RunWorkerCompleted"/>
+    </Window.Resources>
+    
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -35,39 +46,64 @@
             Height="25"
             Margin="10,0,10,0">
         </ComboBox>
+
+
+        <Button
+            x:Name="StartBtn"
+            Click="StartBtn_Click"
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            Margin="7,0,0,0"
+            Style="{StaticResource MaterialDesignFloatingActionButton}"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="False"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+            Height="37"
+            Width="37"
+            Content="{materialDesign:PackIcon Play}" />
         
         <Button
             x:Name="ProgressBtn"
             Grid.Row="0"
             Grid.Column="1"
-            Margin="20,15,0,0"
-            Style="{StaticResource MaterialDesignRaisedButton}"
-            materialDesign:ButtonProgressAssist.Value="-1"
+            HorizontalAlignment="Left"
+            Margin="10,0,0,0"
+            Style="{StaticResource MaterialDesignFloatingActionButton}"
             materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+            materialDesign:ButtonProgressAssist.Value="-1"
             materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-            Content="Проверяем БД..."
-            Height="30" Width="200" HorizontalAlignment="Left" 
-            VerticalAlignment="Top"
-            Visibility="Hidden" IsEnabled="False"/>
+            Height="30"
+            Width="30"
+            Content=""
+            Visibility="Hidden"/>
+
         <Button
-            x:Name="StartBtn"
+            x:Name="SaveBtn"
             Grid.Row="0"
             Grid.Column="1"
-            Margin="20,15,0,0"
-            Height="30" Width="200" HorizontalAlignment="Left" 
-            VerticalAlignment="Top"
-            Style="{StaticResource MaterialDesignRaisedButton}"
-            ToolTip="Начать проверку БД на наличие ошибок"
-            Click="StartBtn_Click"
-            Content="Старт">
-        </Button>
+            HorizontalAlignment="Left"
+            Margin="7,0,0,0"
+            Style="{StaticResource MaterialDesignFloatingActionButton}"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="False"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+            Height="37"
+            Width="37"
+            Content="{materialDesign:PackIcon ContentSave}" 
+            ToolTip="Save"
+            Visibility="Hidden" Click="SaveBtn_Click"/>
 
-        <ProgressBar
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Height="15"
-            Margin="100,-5,100,0"/>
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Content="Command: "
+            Margin="60,0,0,0"/>
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Content="Time to complite: "
+            Margin="60,20,0,0"/>
 
         <Label
             x:Name="resultTxb"
@@ -78,6 +114,7 @@
             Margin="10,10,10,0"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            FontSize="18"
             />
     </Grid>
 </Window>
