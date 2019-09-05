@@ -10,9 +10,12 @@ namespace DatabaseMaintenance
     /// </summary>
     public partial class LoginWindow : Window
     {
+        TempFileStorage fileStorage = new TempFileStorage();
+
         public LoginWindow()
         {
             InitializeComponent();
+            fileStorage.CreateFolder();
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
@@ -35,10 +38,13 @@ namespace DatabaseMaintenance
                     try
                     {
                         connection.Open();
-                        using (StreamWriter stream = new StreamWriter(Directory.GetCurrentDirectory() + "/DatabaseMaintenance"))
-                        {
-                            stream.Write(connectionString);
-                        }
+
+                        fileStorage.CreateFile("Auth", connectionString);
+
+                        //using (StreamWriter stream = new StreamWriter(Directory.GetCurrentDirectory() + "/DatabaseMaintenance"))
+                        //{
+                        //    stream.Write(connectionString);
+                        //}
                         new MainWindow().Show();
                         Close();
                     }
