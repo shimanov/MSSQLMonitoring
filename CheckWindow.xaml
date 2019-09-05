@@ -14,16 +14,11 @@
     <Window.Resources>
         <my:BackgroundWorker
             x:Key="backgroundWorker"
-            WorkerReportsProgress="True"
-            WorkerSupportsCancellation="True"
-            DoWork="BackgroundWorker_DoWork"
-            ProgressChanged="BackgroundWorker_ProgressChanged"
-            RunWorkerCompleted="BackgroundWorker_RunWorkerCompleted"/>
+            RunWorkerCompleted="BackgroundWorker_RunWorkerCompleted_1"/>
     </Window.Resources>
     
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
-            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -109,7 +104,7 @@
             Margin="60,20,0,0"/>
 
         <Label
-            x:Name="resultTxb"
+            x:Name="resultLbl"
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="3"
@@ -117,7 +112,7 @@
             Margin="10,10,10,0"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            FontSize="18"
+            FontSize="15"
             />
     </Grid>
 </Window>

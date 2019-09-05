@@ -13,15 +13,33 @@ namespace DatabaseMaintenance
     /// </summary>
     public partial class CheckWindow : Window
     {
-        //readonly string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
-        readonly string connectionString = "Data Source=10.0.75.1;Initial Catalog =DB633541; User id=sa; password=qwep[]ghjB1";
-
         private readonly BackgroundWorker backgroundWorker;
 
         public CheckWindow()
         {
             InitializeComponent();
-            backgroundWorker = (BackgroundWorker)FindResource("backgroundWorker");
+
+            backgroundWorker = ((BackgroundWorker)FindResource("backgroundWorker"));
+
+            backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
+        }
+
+        //Выполнение в фоне
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Check check = new Check();
+            check.StartCheck();
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted_1(object sender, RunWorkerCompletedEventArgs e)
+        {
+            StartBtn.Visibility = Visibility.Hidden;
+            ProgressBtn.Visibility = Visibility.Hidden;
+            SaveBtn.Visibility = Visibility.Visible;
+
+            resultLbl.Content = File.ReadAllText(Directory.GetCurrentDirectory() + "/CheckDb.rpt");
+
+            MessageBox.Show("DONE!");
         }
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
@@ -29,17 +47,31 @@ namespace DatabaseMaintenance
             StartBtn.Visibility = Visibility.Hidden;
             ProgressBtn.Visibility = Visibility.Visible;
 
-            backgroundWorker.RunWorkerAsync();
+            Check check = new Check();
+
+            backgroundWorker.RunWorkerAsync(check);
         }
 
-        
-
-        //Вызывается при старте потока, длительная операция
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        //Сохранение
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            BackgroundWorker worker = sender as BackgroundWorker;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFileDialog.FileName, resultLbl.Content.ToString());
+            }
+            File.Delete(Directory.GetCurrentDirectory() + "/CheckDb.rpt");
+        }
+    }
 
-            string query = "DBCC CHECKDB() WITH NO_INFOMSGS, ALL_ERRORMSGS, DATA_PURITY;";
+    class Check
+    {
+        //readonly string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance"); WITH NO_INFOMSGS, ALL_ERRORMSGS, DATA_PURITY
+        readonly string connectionString = "Data Source=10.0.75.1;Initial Catalog =master; User id=sa; password=qwep[]ghjB1";
+
+        public void StartCheck()
+        {
+            string query = "use DB673021 DBCC CHECKDB();";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -58,74 +90,6 @@ namespace DatabaseMaintenance
                 command.CommandTimeout = 2147483647;
                 int count = command.ExecuteNonQuery();
                 connection.Close();
-
-                Thread.Sleep(500);
-                //worker.ReportProgress();
-            }
-        }
-
-
-        //Отслеживания прогресса выполнения
-        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            string query = "use master SELECT [command] ,[start_time] ,[percent_complete] ,[estimated_completion_time] / 60000. AS [estimated_completion_time_min] FROM sys.dm_exec_requests WHERE [command] LIKE '%DBCC%'";
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    sqlConnection.Open();
-                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection)
-                    {
-                        CommandTimeout = 30
-                    };
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                    {
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-                                string command = reader.GetString(0);
-                                double percent = reader.GetDouble(2);
-                                double time = reader.GetDouble(3);
-
-                                //double s = Convert.ToDouble(result, CultureInfo.InvariantCulture);
-                                //double s1 = Convert.ToDouble(result1, CultureInfo.InvariantCulture);
-
-                                commandLbl.Content = command;
-                                timeLbl.Content = percent;
-                                ProgressBtn.Content = time;
-                            }
-                        }
-                        reader.Close();
-                    }
-                    sqlConnection.Close();
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-            }
-        }
-
-        //Вызывается по завершению потока
-        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                ProgressBtn.Visibility = Visibility.Hidden;
-                SaveBtn.Visibility = Visibility.Visible;
-                resultTxb.Content = File.ReadAllText(Directory.GetCurrentDirectory() + "/CheckDb.rpt");
-            }
-        }
-
-        //Сохранение
-        private void SaveBtn_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                File.WriteAllText(saveFileDialog.FileName, resultTxb.Content.ToString());
             }
         }
     }
