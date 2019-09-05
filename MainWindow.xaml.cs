@@ -10,11 +10,14 @@ namespace DatabaseMaintenance
     /// </summary>
     public partial class MainWindow : Window
     {
+        TempFileStorage fileStorage = new TempFileStorage();
+
         public MainWindow()
         {
             InitializeComponent();
 
-            string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
+            string connectionString = fileStorage.Read("Auth");
+            //string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
 
             databaseData(connectionString);
             versionServer(connectionString);
