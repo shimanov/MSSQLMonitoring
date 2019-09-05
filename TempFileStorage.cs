@@ -31,7 +31,7 @@ namespace DatabaseMaintenance
         }
 
         //Create file in IsolatedStorage
-        public bool CreateFile(string name, string text)
+        public bool CreateFile(string fileName, string text)
         {
             using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetStore(IsolatedStorageScope.User
                 | IsolatedStorageScope.Domain
@@ -39,8 +39,8 @@ namespace DatabaseMaintenance
             {
                 try
                 {
-                    isolatedStorage.CreateFile("DatabaseMaintenance/" + name);
-                    using (StreamWriter writer = new StreamWriter("DatabaseMaintenance/" + name))
+                    isolatedStorage.CreateFile("DatabaseMaintenance/" + fileName);
+                    using (StreamWriter writer = new StreamWriter("DatabaseMaintenance/" + fileName))
                     {
                         writer.WriteLine(text);
                     }
@@ -54,14 +54,42 @@ namespace DatabaseMaintenance
         }
 
         //Delete file in IsolatedStorage
-        public bool DeleteFile(string name)
+        public bool DeleteFile(string fileName)
         {
-            return true;
+            using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetStore(IsolatedStorageScope.User
+                | IsolatedStorageScope.Domain
+                | IsolatedStorageScope.Assembly, null, null))
+            {
+                if (isolatedStorage.DirectoryExists("DatabaseMaintenance"))
+                {
+                    isolatedStorage.DeleteDirectory("DatabaseMaintenance");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
-        public string Read()
+        //Read file from IsolatedStorage
+        public string Read(string fileName)
         {
-            return "";
+            string text = string.Empty;
+
+            using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetStore(IsolatedStorageScope.User
+                | IsolatedStorageScope.Domain
+                | IsolatedStorageScope.Assembly, null, null))
+            {
+                if (isolatedStorage.FileExists("DatabaseMaintenance/" + fileName))
+                {
+                    using (StreamReader reader = new StreamReader("DatabaseMaintenance/" + fileName))
+                    {
+                        text = reader.ReadToEnd();
+                    }
+                }
+                return text;
+            }
         }
     }
 }
