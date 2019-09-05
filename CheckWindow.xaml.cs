@@ -66,12 +66,12 @@ namespace DatabaseMaintenance
 
     class Check
     {
-        //readonly string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance"); WITH NO_INFOMSGS, ALL_ERRORMSGS, DATA_PURITY
+        //readonly string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance"); 
         readonly string connectionString = "Data Source=10.0.75.1;Initial Catalog =master; User id=sa; password=qwep[]ghjB1";
 
         public void StartCheck()
         {
-            string query = "use DB673021 DBCC CHECKDB();";
+            string query = "use DB673021 DBCC CHECKDB() WITH NO_INFOMSGS, ALL_ERRORMSGS, DATA_PURITY;";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
