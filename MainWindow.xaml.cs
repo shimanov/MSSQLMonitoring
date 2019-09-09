@@ -1,6 +1,5 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 using System.Windows;
 
 namespace DatabaseMaintenance
@@ -17,7 +16,6 @@ namespace DatabaseMaintenance
             InitializeComponent();
 
             string connectionString = fileStorage.Read("Auth");
-            //string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance");
 
             databaseData(connectionString);
             versionServer(connectionString);
@@ -111,6 +109,12 @@ namespace DatabaseMaintenance
         private void AboutBtn_Click(object sender, RoutedEventArgs e)
         {
             new AboutWindow().Show();
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            fileStorage.DeleteFolder("Auth");
+            fileStorage.DeleteFolder("CheckResult");
         }
     }
 }

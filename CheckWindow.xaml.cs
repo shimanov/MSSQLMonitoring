@@ -1,9 +1,7 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.IO;
-using System.Threading;
 using System.Windows;
 
 namespace DatabaseMaintenance
@@ -13,6 +11,7 @@ namespace DatabaseMaintenance
     /// </summary>
     public partial class CheckWindow : Window
     {
+        readonly TempFileStorage fileStorage = new TempFileStorage();
         private readonly BackgroundWorker backgroundWorker;
 
         public CheckWindow()
@@ -37,7 +36,7 @@ namespace DatabaseMaintenance
             ProgressBtn.Visibility = Visibility.Hidden;
             SaveBtn.Visibility = Visibility.Visible;
 
-            resultLbl.Content = File.ReadAllText(Directory.GetCurrentDirectory() + "/CheckDb.rpt");
+            resultLbl.Content = fileStorage.Read("CheckResult");
 
             MessageBox.Show("DONE!");
         }
@@ -60,27 +59,24 @@ namespace DatabaseMaintenance
             {
                 File.WriteAllText(saveFileDialog.FileName, resultLbl.Content.ToString());
             }
-            File.Delete(Directory.GetCurrentDirectory() + "/CheckDb.rpt");
         }
     }
 
     class Check
     {
-        //readonly string connectionString = File.ReadAllText(Directory.GetCurrentDirectory() + "/DatabaseMaintenance"); 
-        readonly string connectionString = "Data Source=10.0.75.1;Initial Catalog =master; User id=sa; password=qwep[]ghjB1";
+        readonly TempFileStorage fileStorage = new TempFileStorage();
 
         public void StartCheck()
         {
-            string query = "use DB673021 DBCC CHECKDB() WITH NO_INFOMSGS, ALL_ERRORMSGS, DATA_PURITY;";
+            string connectionString = fileStorage.Read("Auth");
+
+            string query = "use DB633541 DBCC CHECKDB() WITH NO_INFOMSGS, ALL_ERRORMSGS, DATA_PURITY;";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.InfoMessage += delegate (object sender, SqlInfoMessageEventArgs e)
                 {
-                    using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/CheckDb.rpt"))
-                    {
-                        writer.Write(e.Message);
-                    }
+                    fileStorage.CreateFile("CheckResult", e.Message);
                 };
 
                 connection.Open();

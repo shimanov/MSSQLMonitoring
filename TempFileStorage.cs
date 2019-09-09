@@ -15,7 +15,7 @@ namespace DatabaseMaintenance
                 | IsolatedStorageScope.Domain
                 | IsolatedStorageScope.Assembly, null, null))
             {
-                if (!isolated.DirectoryExists("DatabaseMaintenance"))
+                if (isolated.DirectoryExists("DatabaseMaintenance"))
                 {
                     try
                     {
@@ -30,6 +30,7 @@ namespace DatabaseMaintenance
             }
         }
 
+        private readonly object _readLock = new object();
         //Create file in IsolatedStorage
         public bool CreateFile(string fileName, string text)
         {
@@ -39,12 +40,19 @@ namespace DatabaseMaintenance
             {
                 try
                 {
-                    isolatedStorage.CreateFile("DatabaseMaintenance/" + fileName);
-                    using (StreamWriter writer = new StreamWriter("DatabaseMaintenance/" + fileName))
+                    lock (_readLock)
                     {
-                        writer.WriteLine(text);
+                        using (IsolatedStorageFileStream fileStream = new IsolatedStorageFileStream("DatabaseMaintenance/" + fileName, FileMode.CreateNew, isolatedStorage))
+                        {
+                            using (StreamWriter writer = new StreamWriter(fileStream))
+                            {
+                                writer.WriteLine(text);
+                                writer.Close();
+                            }
+                            fileStream.Close();
+                        }
+                        return true;
                     }
-                    return true;
                 }
                 catch (Exception)
                 {
@@ -54,21 +62,15 @@ namespace DatabaseMaintenance
         }
 
         //Delete file in IsolatedStorage
-        public bool DeleteFile(string fileName)
+        public bool DeleteFolder(string fileName)
         {
             using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetStore(IsolatedStorageScope.User
                 | IsolatedStorageScope.Domain
                 | IsolatedStorageScope.Assembly, null, null))
             {
-                if (isolatedStorage.DirectoryExists("DatabaseMaintenance"))
-                {
-                    isolatedStorage.DeleteDirectory("DatabaseMaintenance");
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                isolatedStorage.DeleteFile("DatabaseMaintenance/" + fileName);
+
+                return true;
             }
         }
 
@@ -83,9 +85,12 @@ namespace DatabaseMaintenance
             {
                 if (isolatedStorage.FileExists("DatabaseMaintenance/" + fileName))
                 {
-                    using (StreamReader reader = new StreamReader("DatabaseMaintenance/" + fileName))
+                    using (IsolatedStorageFileStream isolatedStorageFileStream = new IsolatedStorageFileStream("DatabaseMaintenance/" + fileName, FileMode.Open, isolatedStorage))
                     {
-                        text = reader.ReadToEnd();
+                        using (StreamReader reader = new StreamReader(isolatedStorageFileStream))
+                        {
+                            text = reader.ReadToEnd();
+                        }
                     }
                 }
                 return text;

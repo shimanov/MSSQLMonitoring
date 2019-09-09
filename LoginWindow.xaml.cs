@@ -15,6 +15,9 @@ namespace DatabaseMaintenance
         public LoginWindow()
         {
             InitializeComponent();
+            fileStorage.DeleteFolder("Auth");
+            fileStorage.DeleteFolder("CheckResult");
+
             fileStorage.CreateFolder();
         }
 
@@ -40,11 +43,6 @@ namespace DatabaseMaintenance
                         connection.Open();
 
                         fileStorage.CreateFile("Auth", connectionString);
-
-                        //using (StreamWriter stream = new StreamWriter(Directory.GetCurrentDirectory() + "/DatabaseMaintenance"))
-                        //{
-                        //    stream.Write(connectionString);
-                        //}
                         new MainWindow().Show();
                         Close();
                     }
