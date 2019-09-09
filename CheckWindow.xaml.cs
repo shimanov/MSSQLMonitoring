@@ -1,5 +1,7 @@
 ﻿using Microsoft.Win32;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Windows;
@@ -17,6 +19,8 @@ namespace DatabaseMaintenance
         public CheckWindow()
         {
             InitializeComponent();
+
+            DbList(fileStorage.Read("Auth"));
 
             backgroundWorker = ((BackgroundWorker)FindResource("backgroundWorker"));
 
@@ -60,17 +64,44 @@ namespace DatabaseMaintenance
                 File.WriteAllText(saveFileDialog.FileName, resultLbl.Content.ToString());
             }
         }
+
+        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Progress progress = new Progress();
+            ProgressBtn.Content = progress.Procent();
+        }
+
+        private void DbList(string conn)
+        {
+            string query = "use master select name from sys.databases";
+            using (SqlConnection sqlConnection = new SqlConnection(conn))
+            {
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, conn);
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+
+                dbCmb.ItemsSource = dataTable.DefaultView;
+                dbCmb.DisplayMemberPath = "name";
+                dbCmb.SelectedValuePath = "master";
+                sqlConnection.Close();
+
+            }
+        }
     }
 
     class Check
     {
         readonly TempFileStorage fileStorage = new TempFileStorage();
 
+        
+
         public void StartCheck()
         {
             string connectionString = fileStorage.Read("Auth");
 
-            string query = "use DB633541 DBCC CHECKDB() WITH NO_INFOMSGS, ALL_ERRORMSGS, DATA_PURITY;";
+            string query = "use DBCC CHECKDB() WITH NO_INFOMSGS, ALL_ERRORMSGS, DATA_PURITY;";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -87,6 +118,38 @@ namespace DatabaseMaintenance
                 int count = command.ExecuteNonQuery();
                 connection.Close();
             }
+        }
+    }
+    class Progress
+    {
+        readonly TempFileStorage fileStorage = new TempFileStorage();
+        BackgroundWorker backgroundWorker = new BackgroundWorker();
+        public int Procent()
+        {
+            string connectionString = fileStorage.Read("Auth");
+            int perc = 0;
+
+            string query = "USE master SELECT [percent_complete] FROM sys.dm_exec_requests WHERE [command] LIKE '%DBCC%'";
+
+            if (backgroundWorker.WorkerReportsProgress)
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            backgroundWorker.ReportProgress((int)reader.GetDouble(0));
+                            perc = (int)reader.GetDouble(0);
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            return perc;
+
         }
     }
 }
