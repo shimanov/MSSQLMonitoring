@@ -76,10 +76,11 @@ namespace DatabaseMaintenance
 
         private void SelectCmb_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            string domain = Environment.UserDomainName;
             if (selectCmb.SelectedIndex == 1)
             {
                 UserTxb.IsEnabled = false;
-                UserTxb.Text = Environment.UserName;
+                UserTxb.Text = domain + "/" + Environment.UserName.ToUpper();
                 PasswordTxb.IsEnabled = false;
                 PasswordTxb.Password = string.Empty;
             }

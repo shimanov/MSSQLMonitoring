@@ -52,7 +52,7 @@ namespace DatabaseMaintenance
                 {
                     while (reader.Read())
                     {
-                        physMemoryCard.Content = "Память: " + reader[0] + " MB";
+                        physMemoryCard.Content = "Общий объем ОЗУ: " + reader[0] + " MB";
                     }
                 }
                 connection.Close();
