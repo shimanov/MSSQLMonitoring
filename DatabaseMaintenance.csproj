@@ -4,16 +4,27 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>0.0.0.2</AssemblyVersion>
-    <FileVersion>0.0.0.2</FileVersion>
+    <AssemblyVersion>0.0.0.5</AssemblyVersion>
+    <FileVersion>0.0.0.5</FileVersion>
     <ApplicationIcon>img\database.ico</ApplicationIcon>
-    <Version>0.0.0.1</Version>
+    <Version>0.0.0.5</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryUrl>https://github.com/shimanov/DatabaseMaintenance</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/shimanov/DatabaseMaintenance</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="1.2.0" />
     <PackageReference Include="MaterialDesignThemes" Version="2.6.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
