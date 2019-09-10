@@ -10,7 +10,7 @@ namespace DatabaseMaintenance
     /// </summary>
     public partial class LoginWindow : Window
     {
-        TempFileStorage fileStorage = new TempFileStorage();
+        readonly TempFileStorage fileStorage = new TempFileStorage();
 
         public LoginWindow()
         {
@@ -62,10 +62,7 @@ namespace DatabaseMaintenance
                     try
                     {
                         connection.Open();
-                        using (StreamWriter stream = new StreamWriter(Directory.GetCurrentDirectory() + "/DatabaseMaintenance"))
-                        {
-                            stream.Write(connectionStringWin);
-                        }
+                        fileStorage.CreateFile("Auth", connectionStringWin);
                         new MainWindow().Show();
                         Close();                        
                     }
@@ -74,6 +71,17 @@ namespace DatabaseMaintenance
                         MessageBox.Show(exp.Message);
                     }
                 }
+            }
+        }
+
+        private void SelectCmb_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (selectCmb.SelectedIndex == 1)
+            {
+                UserTxb.IsEnabled = false;
+                UserTxb.Text = Environment.UserName;
+                PasswordTxb.IsEnabled = false;
+                PasswordTxb.Password = string.Empty;
             }
         }
     }

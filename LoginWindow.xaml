@@ -44,7 +44,7 @@
                   Grid.Row="1"
                   Grid.Column="1"
                   Height="25"
-                  Margin="0,-4,10,0">
+                  Margin="0,-4,10,0" SelectedIndex="0" SelectionChanged="SelectCmb_SelectionChanged">
             <ComboBoxItem Tag="1">Проверка подлинности SQL Server</ComboBoxItem>
             <ComboBoxItem Tag="2">Проверка подлинности Windows</ComboBoxItem>
         </ComboBox>
