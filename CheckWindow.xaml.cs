@@ -13,7 +13,7 @@ namespace DatabaseMaintenance
     /// </summary>
     public partial class CheckWindow : Window
     {
-        readonly TempFileStorage fileStorage = new TempFileStorage();
+        readonly TempFileStorage.TempFileStorage fileStorage = new TempFileStorage.TempFileStorage();
         private readonly BackgroundWorker backgroundWorker;
 
         public CheckWindow()
@@ -93,9 +93,7 @@ namespace DatabaseMaintenance
 
     class Check
     {
-        readonly TempFileStorage fileStorage = new TempFileStorage();
-
-        
+        readonly TempFileStorage.TempFileStorage fileStorage = new TempFileStorage.TempFileStorage();
 
         public void StartCheck()
         {
@@ -122,7 +120,7 @@ namespace DatabaseMaintenance
     }
     class Progress
     {
-        readonly TempFileStorage fileStorage = new TempFileStorage();
+        readonly TempFileStorage.TempFileStorage fileStorage = new TempFileStorage.TempFileStorage();
         BackgroundWorker backgroundWorker = new BackgroundWorker();
         public int Procent()
         {

@@ -10,7 +10,7 @@ namespace DatabaseMaintenance
     /// </summary>
     public partial class LoginWindow : Window
     {
-        readonly TempFileStorage fileStorage = new TempFileStorage();
+        readonly TempFileStorage.TempFileStorage fileStorage = new TempFileStorage.TempFileStorage();
 
         public LoginWindow()
         {
