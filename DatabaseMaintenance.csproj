@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ScriptsLibrary\ScriptsLibrary.csproj" />
     <ProjectReference Include="..\TempFileStorage\TempFileStorage.csproj" />
   </ItemGroup>
 
