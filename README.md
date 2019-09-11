@@ -1,7 +1,7 @@
-# Database Maintenance
+# MS SQL Server Monitoring
 
 ### ToDo
-- [x] sa авторизация
+- [x] MS SQL авторизация
 - [x] Windows авторизация
 - [ ] Сохранение пароля 
 - [x] Список БД на сервере
