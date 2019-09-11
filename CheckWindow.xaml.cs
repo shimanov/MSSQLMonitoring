@@ -118,6 +118,7 @@ namespace DatabaseMaintenance
             }
         }
     }
+
     class Progress
     {
         readonly TempFileStorage.TempFileStorage fileStorage = new TempFileStorage.TempFileStorage();
@@ -147,7 +148,6 @@ namespace DatabaseMaintenance
                 }
             }
             return perc;
-
         }
     }
 }
