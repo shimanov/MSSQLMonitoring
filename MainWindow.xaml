@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:DatabaseMaintenance"
         mc:Ignorable="d"
-        Title="DatabaseMaintenance" 
+        Title="MS SQL Monotoring" 
         Height="800" Width="1400"
         WindowStartupLocation="CenterScreen"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"

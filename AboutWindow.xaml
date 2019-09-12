@@ -9,7 +9,8 @@
         WindowStartupLocation="CenterScreen"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}" 
-        Title="About" Height="250" Width="460"
+        Title="About" 
+        Height="250" Width="460"
         ResizeMode="NoResize"
         WindowStyle="SingleBorderWindow">
     <Grid>
