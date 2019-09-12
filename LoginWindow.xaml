@@ -8,7 +8,6 @@
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
-        TextBlock.TextAlignment="Center"
         Height="262" Width="455" 
         WindowStyle="ToolWindow" 
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
