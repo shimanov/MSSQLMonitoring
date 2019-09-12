@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
+using ScriptsLibrary;
 
 namespace DatabaseMaintenance
 {
@@ -10,6 +11,8 @@ namespace DatabaseMaintenance
     public partial class MainWindow : Window
     {
         readonly TempFileStorage.TempFileStorage fileStorage = new TempFileStorage.TempFileStorage();
+        Script script = new Script();
+
 
         public MainWindow()
         {
@@ -19,44 +22,22 @@ namespace DatabaseMaintenance
 
             databaseData(connectionString);
             versionServer(connectionString);
-            memoryServer(connectionString);
-            sqlMemory(connectionString);
+            memoryServer();
+            sqlMemory();
         }
 
-        private void memoryServer(string conn)
+        private void memoryServer()
         {
-            string queryString = "use master select (physical_memory_in_use_kb/1024)Phy_Memory_usedby_Sqlserver_MB from sys. dm_os_process_memory";
-            using (SqlConnection connection = new SqlConnection(conn))
-            {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                connection.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        memoryCard.Content = "Объем использованной ОЗУ SQL: " + reader[0] + " MB";
-                    }
-                }
-                connection.Close();
-            }
+            string res = script.ExecuteScript("UsingMemory.sql");
+
+            memoryCard.Content = "Объем использованной ОЗУ SQL: " + res + " MB";
         }
 
-        private void sqlMemory(string conn)
+        private void sqlMemory()
         {
-            string queryString = "use master select (total_physical_memory_kb/1024) from sys.dm_os_sys_memory";
-            using (SqlConnection connection = new SqlConnection(conn))
-            {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                connection.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        physMemoryCard.Content = "Общий объем ОЗУ: " + reader[0] + " MB";
-                    }
-                }
-                connection.Close();
-            }
+            string res = script.ExecuteScript("TotalPhysMemory.sql");
+
+            physMemoryCard.Content = "Общий объем ОЗУ: " + res + " MB";
         }
 
         private void databaseData(string conn)
