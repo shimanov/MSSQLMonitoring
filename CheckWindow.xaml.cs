@@ -86,7 +86,6 @@ namespace DatabaseMaintenance
                 dbCmb.DisplayMemberPath = "name";
                 dbCmb.SelectedValuePath = "master";
                 sqlConnection.Close();
-
             }
         }
     }
