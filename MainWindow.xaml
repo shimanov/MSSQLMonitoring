@@ -133,7 +133,6 @@
             CanUserSortColumns="False"
             CanUserAddRows="False"
             AutoGenerateColumns="True">
-            <DataGrid.Columns/>
         </DataGrid>
 
         <DataGrid

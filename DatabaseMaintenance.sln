@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseMaintenance", "Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TempFileStorage", "..\TempFileStorage\TempFileStorage.csproj", "{DF2DE0F5-C686-4BD2-8ADE-EC3BD9B6AC93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptsLibrary", "..\ScriptsLibrary\ScriptsLibrary.csproj", "{73A4897C-AFEE-402F-9C65-800A409FBFEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptsLibrary", "..\ScriptsLibrary\ScriptsLibrary.csproj", "{2A5CA743-7444-4201-BAC1-22230CFEE14C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{DF2DE0F5-C686-4BD2-8ADE-EC3BD9B6AC93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF2DE0F5-C686-4BD2-8ADE-EC3BD9B6AC93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF2DE0F5-C686-4BD2-8ADE-EC3BD9B6AC93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{73A4897C-AFEE-402F-9C65-800A409FBFEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73A4897C-AFEE-402F-9C65-800A409FBFEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73A4897C-AFEE-402F-9C65-800A409FBFEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73A4897C-AFEE-402F-9C65-800A409FBFEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A5CA743-7444-4201-BAC1-22230CFEE14C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A5CA743-7444-4201-BAC1-22230CFEE14C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A5CA743-7444-4201-BAC1-22230CFEE14C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A5CA743-7444-4201-BAC1-22230CFEE14C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
