@@ -13,7 +13,6 @@ namespace DatabaseMaintenance
         readonly TempFileStorage.TempFileStorage fileStorage = new TempFileStorage.TempFileStorage();
         Script script = new Script();
 
-
         public MainWindow()
         {
             InitializeComponent();
