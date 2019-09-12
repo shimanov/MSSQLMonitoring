@@ -1,5 +1,7 @@
 # MS SQL Server Monitoring
 
+[![CodeFactor](https://www.codefactor.io/repository/github/shimanov/mssqlmonitoring/badge)](https://www.codefactor.io/repository/github/shimanov/mssqlmonitoring)
+
 ### ToDo
 - [x] MS SQL авторизация
 - [x] Windows авторизация
