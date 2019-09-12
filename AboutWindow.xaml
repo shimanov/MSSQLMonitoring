@@ -35,7 +35,7 @@
         <Label Grid.Row="0"
                Grid.Column="2"
                Grid.ColumnSpan="3"
-               Content="Database maintenence" 
+               Content="MSSQLMonitoring" 
                FontWeight="Bold"
                FontSize="20"
                Margin="0,15,0,0"/>
@@ -43,7 +43,7 @@
                Grid.Row="1"
                Grid.Column="2"
                Grid.ColumnSpan="2"
-               Content="Version: 0.0.0.1"/>
+               Content=""/>
 
         <Label Grid.Row="1"
                Grid.Column="2"
@@ -53,7 +53,7 @@
                ScrollViewer.VerticalScrollBarVisibility="Disabled">
             <Label.Content>
                 <TextBlock TextWrapping="Wrap">
-                    Database maintenence - приложение для обслуживания СУБД.
+                    MSSQLMonitoring - мониторинг работы СУБД.
                 </TextBlock>
             </Label.Content>
         </Label>
