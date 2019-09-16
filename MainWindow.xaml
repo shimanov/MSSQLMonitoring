@@ -103,7 +103,7 @@
         </Button>
 
         <materialDesign:Card
-            Name="physMemoryCard"
+            x:Name="physMemoryCard"
             Grid.Column="5"
             Grid.Row="0"
             Grid.ColumnSpan="3"
@@ -123,10 +123,20 @@
             Padding="35,10,0,0"
             materialDesign:ShadowAssist.ShadowDepth="Depth3"/>
 
+        <materialDesign:Card 
+            x:Name="maxMemoryCard"
+            Grid.Column="5"
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            Height="40"
+            Margin="0,15,0,0"
+            Padding="35,10,0,0"
+            materialDesign:ShadowAssist.ShadowDepth="Depth3"/>
+
         <DataGrid
             x:Name="versionGrid"
             Grid.Column="5"
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.RowSpan="2"
             Grid.ColumnSpan="4"
             HorizontalScrollBarVisibility="Disabled"

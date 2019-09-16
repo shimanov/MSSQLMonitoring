@@ -21,6 +21,7 @@ namespace DatabaseMaintenance
             versionServer();
             memoryServer();
             sqlMemory();
+            maxMemory();
         }
 
         private void memoryServer()
@@ -35,6 +36,13 @@ namespace DatabaseMaintenance
             string res = script.ExecuteScript("TotalPhysMemory.sql");
 
             physMemoryCard.Content = "Общий объем ОЗУ: " + res + " MB";
+        }
+
+        private void maxMemory()
+        {
+            string res = script.ExecuteScript("MaxServerMemory.sql");
+
+            maxMemoryCard.Content = "Выделенно ОЗУ: " + res + " MB";
         }
 
         private void databaseData()
