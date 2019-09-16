@@ -66,7 +66,8 @@
             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
             materialDesign:ShadowAssist.ShadowDepth="Depth4"
             ToolTip="Проверить БД на наличие ошибок" Height="40" VerticalAlignment="Top" 
-            Click="CheckBtn_Click">
+            Click="CheckBtn_Click"
+            IsEnabled="False">
             <materialDesign:PackIcon
                 Kind="DatabaseRefresh"
                 Height="24"
@@ -157,7 +158,8 @@
             Grid.ColumnSpan="5"
             CanUserSortColumns="True"
             CanUserAddRows="False"
-            AutoGenerateColumns="True"/>
+            AutoGenerateColumns="True"
+            HorizontalScrollBarVisibility="Hidden"/>
 
     </Grid>
 </Window>

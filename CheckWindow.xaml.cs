@@ -88,6 +88,11 @@ namespace DatabaseMaintenance
                 sqlConnection.Close();
             }
         }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            fileStorage.DeleteFolder("CheckResult");
+        }
     }
 
     class Check

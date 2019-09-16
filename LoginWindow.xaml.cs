@@ -15,8 +15,8 @@ namespace DatabaseMaintenance
         public LoginWindow()
         {
             InitializeComponent();
-            fileStorage.DeleteFolder("Auth");
-            fileStorage.DeleteFolder("CheckResult");
+            //fileStorage.DeleteFolder("Auth");
+            //fileStorage.DeleteFolder("CheckResult");
 
             fileStorage.CreateFolder();
         }

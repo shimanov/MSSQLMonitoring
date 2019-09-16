@@ -10,7 +10,7 @@
         WindowStartupLocation="CenterScreen"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
-        Title="CheckWindow" Height="450" Width="800">
+        Title="CheckWindow" Height="450" Width="800" Closed="Window_Closed">
     <Window.Resources>
         <my:BackgroundWorker
             x:Key="backgroundWorker"

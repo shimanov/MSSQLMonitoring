@@ -78,7 +78,6 @@ namespace DatabaseMaintenance
         private void Window_Closed(object sender, System.EventArgs e)
         {
             fileStorage.DeleteFolder("Auth");
-            fileStorage.DeleteFolder("CheckResult");
         }
     }
 }
