@@ -80,7 +80,8 @@
             Margin="20,10,0,0"
             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
             materialDesign:ShadowAssist.ShadowDepth="Depth4"
-            ToolTip="Исправить ошибки в БД" Height="40" VerticalAlignment="Top">
+            ToolTip="Исправить ошибки в БД" Height="40" VerticalAlignment="Top"
+            IsEnabled="False">
             <materialDesign:PackIcon
                 Kind="DatabaseCheck"
                 Height="24"
@@ -108,7 +109,7 @@
             Grid.Row="0"
             Grid.ColumnSpan="3"
             Height="40"
-            Margin="0,15,0,0"
+            Margin="10,15,0,0"
             Padding="35,10,0,0"
             materialDesign:ShadowAssist.ShadowDepth="Depth3"/>
 
@@ -119,7 +120,7 @@
             Grid.Row="1"
             Grid.ColumnSpan="3"
             Height="40"
-            Margin="0,15,0,0"
+            Margin="10,15,0,0"
             Padding="35,10,0,0"
             materialDesign:ShadowAssist.ShadowDepth="Depth3"/>
 
@@ -129,7 +130,7 @@
             Grid.Row="2"
             Grid.ColumnSpan="3"
             Height="40"
-            Margin="0,15,0,0"
+            Margin="10,15,0,0"
             Padding="35,10,0,0"
             materialDesign:ShadowAssist.ShadowDepth="Depth3"/>
 
@@ -142,7 +143,8 @@
             HorizontalScrollBarVisibility="Disabled"
             CanUserSortColumns="False"
             CanUserAddRows="False"
-            AutoGenerateColumns="True">
+            AutoGenerateColumns="True"
+            Margin="10,0,0,0">
         </DataGrid>
 
         <DataGrid
@@ -151,27 +153,10 @@
             Grid.Column="0"
             Grid.Row="1"
             Grid.RowSpan="9"
-            Grid.ColumnSpan="4"
+            Grid.ColumnSpan="5"
             CanUserSortColumns="True"
             CanUserAddRows="False"
-            AutoGenerateColumns="True">
-            <DataGrid.Columns>
-                <!--<DataGridCheckBoxColumn
-                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
-                    <DataGridCheckBoxColumn.Header>
-                        <Border
-                          Background="Transparent"
-                          Padding="6 0 6 0"
-                          HorizontalAlignment="Center">
-                            <CheckBox
-                            HorizontalAlignment="Center"
-                            DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext}"
-                            IsChecked="{Binding IsAllItems3Selected}" />
-                        </Border>
-                    </DataGridCheckBoxColumn.Header>
-                </DataGridCheckBoxColumn>-->
-            </DataGrid.Columns>
-        </DataGrid>
+            AutoGenerateColumns="True"/>
+
     </Grid>
 </Window>
