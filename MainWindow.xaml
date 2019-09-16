@@ -65,7 +65,8 @@
             Margin="20,10,0,0"
             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
             materialDesign:ShadowAssist.ShadowDepth="Depth4"
-            ToolTip="Проверить БД на наличие ошибок" Height="40" VerticalAlignment="Top" Click="CheckBtn_Click">
+            ToolTip="Проверить БД на наличие ошибок" Height="40" VerticalAlignment="Top" 
+            Click="CheckBtn_Click">
             <materialDesign:PackIcon
                 Kind="DatabaseRefresh"
                 Height="24"

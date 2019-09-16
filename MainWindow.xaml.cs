@@ -64,6 +64,9 @@ namespace DatabaseMaintenance
 
         private void CheckBtn_Click(object sender, RoutedEventArgs e)
         {
+#if RELEASE
+            CheckBtn.IsEnabled = false;
+#endif
             new CheckWindow().Show();
         }
 
