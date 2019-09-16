@@ -16,8 +16,6 @@
     <Product>MSSQLMonitoring</Product>
     <SignAssembly>false</SignAssembly>
     <AssemblyName>DatabaseMaintenance</AssemblyName>
-    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
-    <PublishSingleFile>true</PublishSingleFile>
   </PropertyGroup>
 
   <ItemGroup>
