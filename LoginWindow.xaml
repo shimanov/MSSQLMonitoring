@@ -10,7 +10,8 @@
         Background="{DynamicResource MaterialDesignPaper}"
         Height="262" Width="455" 
         WindowStyle="ToolWindow" 
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Title="Соединение с сервером">
     <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -56,7 +57,7 @@
                  Grid.Column="1"
                  x:Name="UserTxb" 
                  Height="25" 
-                 Text="sa" 
+                 Text="" 
                  Margin="0,-10,10,0"/>
         <Label Grid.Row="3"
                Grid.Column="0"
@@ -68,7 +69,7 @@
                      x:Name="PasswordTxb"
                      Height="25"
                      Margin="0,-10,10,0"
-                     Password="qwep[]ghjB1"/>
+                     Password=""/>
         <Button x:Name="ConnectionBtn" 
                 Content="Соединить"
                 Grid.Row="4"
